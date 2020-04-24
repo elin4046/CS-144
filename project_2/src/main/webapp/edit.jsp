@@ -18,23 +18,31 @@ prefix="c" %><!DOCTYPE html>
     <link rel="stylesheet" type="text/css" href="edit.css" />
   </head>
   <body>
-    <div><h1>Edit Post</h1></div>
-    <form>
-      <div>
-        <button type="submit">Save</button>
-        <button type="submit">Close</button>
-        <button type="submit">Preview</button>
-        <button type="submit">Delete</button>
+    <div class="edit-wrapper">
+      <h1>Edit Post</h1>
+      <div class="button-row">
+        <button type="submit" form="save" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-warning">Close</button>
+        <button type="button" class="btn btn-info">Preview</button>
+        <button type="button" class="btn btn-danger">Delete</button>
       </div>
-      <div>
-        <label for="title">Title</label>
-        <input type="text" id="title" />
-      </div>
-      <div>
-        <label for="body">Body</label>
-        <textarea style="height: 20rem;" id="body"></textarea>
-      </div>
-    </form>
+      <form action="post" method="POST" id="save">
+        <input id="action" name="action" value="save" style="display: none;" />
+        <div class="title-wrapper">
+          <label for="title" class="title-label">Title</label>
+          <input type="text" class="form-control" id="title" name="title" />
+        </div>
+        <div class="body-wrapper">
+          <label for="body" class="title-label">Body</label>
+          <textarea
+            class="form-control"
+            id="body"
+            name="body"
+            style="height: 250px; width: 350px;"
+          ></textarea>
+        </div>
+      </form>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
