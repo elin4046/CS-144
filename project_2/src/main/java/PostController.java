@@ -5,14 +5,14 @@ import java.util.Date;
 
 
 public class PostController {
-    public PostController(String username, String password) {
+    public PostController() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
             System.out.println(ex);
         }
-        this.dbUsername = username; 
-        this.dbPassword = password;
+        this.dbUsername = "cs144"; 
+        this.dbPassword = "";
     }
 
     // Retrieve a post from the database using the primary keys: usernamd and postId 
