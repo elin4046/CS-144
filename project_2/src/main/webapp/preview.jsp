@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%><%@ taglib uri="http://java.sun.com/jsp/jstl/core"
+prefix="c" %><!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -12,10 +15,25 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <link rel="stylesheet" type="text/css" href="preview.css" />
+    <link rel="stylesheet" type="text/css" href="edit.css" />
   </head>
   <body>
-    <div><h1>Preview Post</h1></div>
+    <div class="edit-wrapper">
+      <div class="button-row">
+        <form action="post" method="POST">
+          <input name="username" value="${username}" style="display: none;" />
+          <input name="postid" value="${postid}" style="display: none;" />
+          <input name="action" value="open" style="display: none;" />
+          <button type="submit" class="btn btn-info">
+            Close Preview
+          </button>
+        </form>
+      </div>
+      <div class="markdown-content">
+        <div>${markdownTitle}</div>
+        <div>${markdownBody}</div>
+      </div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

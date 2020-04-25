@@ -61,18 +61,31 @@ prefix="c" %><!DOCTYPE html>
                 <button
                   type="submit"
                   class="btn btn-success"
-                  style="margin-bottom: 5px; border-radius: 5px;"
+                  style="margin-bottom: 5px; border-radius: 5px; width: 80px;"
                 >
                   Open
                 </button>
               </form>
-              <button
-                type="button"
-                class="btn btn-danger"
-                style="border-radius: 5px;"
-              >
-                Delete
-              </button>
+              <form action="post" method="POST">
+                <input name="action" value="delete" style="display: none;" />
+                <input
+                  name="username"
+                  value="${username}"
+                  style="display: none;"
+                />
+                <input
+                  name="postid"
+                  value="${post.postId}"
+                  style="display: none;"
+                />
+                <button
+                  type="submit"
+                  class="btn btn-danger"
+                  style="border-radius: 5px; width: 80px;"
+                >
+                  Delete
+                </button>
+              </form>
             </div>
           </div>
         </c:forEach>

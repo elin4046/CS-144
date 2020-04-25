@@ -23,36 +23,54 @@ prefix="c" %><!DOCTYPE html>
       <div class="button-row">
         <button
           type="submit"
-          form="save"
           class="btn btn-primary"
           style="margin-left: 8px; margin-right: 8px;"
+          form="save"
         >
           Save
         </button>
-        <button
-          type="button"
-          class="btn btn-warning"
-          style="margin-left: 8px; margin-right: 8px;"
-        >
-          Close
-        </button>
-        <button
-          type="button"
-          class="btn btn-info"
-          style="margin-left: 8px; margin-right: 8px;"
-        >
-          Preview
-        </button>
-        <button
-          type="button"
-          class="btn btn-danger"
-          style="margin-left: 8px; margin-right: 8px;"
-        >
-          Delete
-        </button>
+        <form action="post" method="POST">
+          <input name="action" value="list" style="display: none;" />
+          <input name="username" value="${username}" style="display: none;" />
+          <button
+            type="submit"
+            class="btn btn-warning"
+            style="margin-left: 8px; margin-right: 8px;"
+          >
+            Close
+          </button>
+        </form>
+        <form action="post" method="POST">
+          <input name="action" value="preview" style="display: none;" />
+          <input name="username" value="${username}" style="display: none;" />
+          <input name="postid" value="${postid}" style="display: none;" />
+          <input name="title" value="${title}" style="display: none;" />
+          <input name="body" value="${body}" style="display: none;" />
+          <button
+            type="submit"
+            class="btn btn-info"
+            style="margin-left: 8px; margin-right: 8px;"
+          >
+            Preview
+          </button>
+        </form>
+        <form action="post" method="POST">
+          <input name="action" value="delete" style="display: none;" />
+          <input name="username" value="${username}" style="display: none;" />
+          <input name="postid" value="${postid}" style="display: none;" />
+          <button
+            type="submit"
+            class="btn btn-danger"
+            style="margin-left: 8px; margin-right: 8px;"
+          >
+            Delete
+          </button>
+        </form>
       </div>
       <form action="post" method="POST" id="save">
-        <input id="action" name="action" value="save" style="display: none;" />
+        <input name="action" value="save" style="display: none;" />
+        <input name="username" value="${username}" style="display: none;" />
+        <input name="postid" value="${postid}" style="display: none;" />
         <div class="title-wrapper">
           <label for="title" class="title-label">Title</label>
           <input
@@ -69,7 +87,7 @@ prefix="c" %><!DOCTYPE html>
             class="form-control"
             id="body"
             name="body"
-            style="height: 250px; width: 350px;"
+            style="height: 250px; width: 350px; margin-bottom: 10px;"
           >
 ${body}</textarea
           >
