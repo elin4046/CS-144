@@ -261,7 +261,9 @@ public class Editor extends HttpServlet {
         }
         
         controller.deletePost(username, id);
+        List<Post> posts = controller.getPostsMadeByUsername(username);
         request.setAttribute("username", username);
+        request.setAttribute("posts", posts);
         return HttpServletResponse.SC_OK;
     }
 
