@@ -29,16 +29,6 @@ public class Editor extends HttpServlet {
      */
     public Editor() {}
 
-    public void init() throws ServletException
-    {
-        /*  write any servlet initialization code here or remove this function */
-    }
-    
-    public void destroy()
-    {
-        /*  write any servlet cleanup code here or remove this function */
-    }
-
     /**
      * Handles HTTP GET requests
      * 
@@ -160,8 +150,16 @@ public class Editor extends HttpServlet {
             return HttpServletResponse.SC_OK;
         }
 
-        // No postid specified, so leave the fields title and body blank
-        int id = Integer.parseInt(postId);
+        // Check if postId parameter is actually a number
+        int id = 0;
+        try {
+            id = Integer.parseInt(postId);
+        }
+        catch(NumberFormatException ex) {
+            return HttpServletResponse.SC_BAD_REQUEST;
+        }
+
+        // Invalid postid specified, so leave the fields title and body blank
         if (id <= 0) {
             request.setAttribute("title", "");
             request.setAttribute("body", "");
@@ -214,7 +212,16 @@ public class Editor extends HttpServlet {
         }
 
         PostController controller = new PostController();
-        int id = Integer.parseInt(postId);
+        
+        // Check if postId is a string 
+        int id = 0;
+        try {
+            id = Integer.parseInt(postId);
+        }
+        catch(NumberFormatException ex) {
+            return HttpServletResponse.SC_BAD_REQUEST;
+        }
+
         if (id <= 0) {
             // Get the next id to use 
             int nextAvailablePostId = controller.getMaxPostIdFromUser(username) + 1;
@@ -243,7 +250,16 @@ public class Editor extends HttpServlet {
         }
 
         PostController controller = new PostController();
-        int id = Integer.parseInt(postId);
+
+        // Check if postId is a string 
+        int id = 0;
+        try {
+            id = Integer.parseInt(postId);
+        }
+        catch(NumberFormatException ex) {
+            return HttpServletResponse.SC_BAD_REQUEST;
+        }
+        
         controller.deletePost(username, id);
         request.setAttribute("username", username);
         return HttpServletResponse.SC_OK;
