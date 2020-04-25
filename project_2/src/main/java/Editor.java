@@ -236,6 +236,8 @@ public class Editor extends HttpServlet {
                 controller.updatePost(newPost);
             }
         }
+        List<Post> posts = controller.getPostsMadeByUsername(username);
+        request.setAttribute("posts", posts);
         request.setAttribute("username", username);
         return HttpServletResponse.SC_OK;
     }
@@ -263,8 +265,8 @@ public class Editor extends HttpServlet {
         
         controller.deletePost(username, id);
         List<Post> posts = controller.getPostsMadeByUsername(username);
-        request.setAttribute("username", username);
         request.setAttribute("posts", posts);
+        request.setAttribute("username", username);
         return HttpServletResponse.SC_OK;
     }
 
