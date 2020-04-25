@@ -153,7 +153,7 @@ public class Editor extends HttpServlet {
         String title = request.getParameter("title"); 
         String body = request.getParameter("body"); 
         if (title != null && body != null) {
-            request.setAttribute("title", title); 
+            request.setAttribute("title", title.replaceAll("\"", "&quot;")); 
             request.setAttribute("postid", postId); 
             request.setAttribute("body", body); 
             request.setAttribute("username", username);
@@ -177,7 +177,7 @@ public class Editor extends HttpServlet {
         // Entry exists in the database, so populate the fields title and body with them 
         if (post != null) {
             request.setAttribute("postid", postId); 
-            request.setAttribute("title", post.getTitle()); 
+            request.setAttribute("title", post.getTitle().replaceAll("\"", "&quot;")); 
             request.setAttribute("body", post.getBody());
             request.setAttribute("username", username);
             return HttpServletResponse.SC_OK;
