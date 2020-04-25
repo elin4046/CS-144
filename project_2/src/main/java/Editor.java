@@ -113,6 +113,9 @@ public class Editor extends HttpServlet {
                 requestDispatcher = "/list.jsp";
                 break;
             case "delete": 
+                statusCode = deletePost(request, response);
+                requestDispatcher ="/list.jsp";
+                break;
             default: 
                 statusCode = HttpServletResponse.SC_BAD_REQUEST;
         }
@@ -126,15 +129,6 @@ public class Editor extends HttpServlet {
         }  
     }
 
-    private void getParameterAndSetAttribute(HttpServletRequest request, String parameterName, String attributeName) {
-        String parameterValue = request.getParameter(parameterName); 
-        if (parameterValue != null) {
-            request.setAttribute(attributeName, parameterName);
-        }
-        else {
-            request.setAttribute(attributeName, ""); 
-        }
-    }
 
     // Handler for the 'open' action 
     // Provides the 'title' and 'body' fields of the edit form if a post exists in the database or if the information is in the request parameter
@@ -225,6 +219,22 @@ public class Editor extends HttpServlet {
                 controller.updatePost(post);
             }
         }
+        return HttpServletResponse.SC_OK;
+    }
+
+    // Handler for 'delete' action
+    private int deletePost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        // Required parameters: username, postid, title, and body
+        String username = request.getParameter("username");
+        String postId = request.getParameter("postid");
+        if (username == null || postId == null) {
+            return HttpServletResponse.SC_BAD_REQUEST; 
+        }
+
+        PostController controller = new PostController();
+        int id = Integer.parseInt(postId);
+        controller.deletePost(username, id);
         return HttpServletResponse.SC_OK;
     }
 }
