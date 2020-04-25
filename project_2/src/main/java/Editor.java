@@ -150,6 +150,7 @@ public class Editor extends HttpServlet {
         if (title != null && body != null) {
             request.setAttribute("title", title); 
             request.setAttribute("body", body); 
+            request.setAttribute("username", username);
             return HttpServletResponse.SC_OK;
         }
 
@@ -158,6 +159,7 @@ public class Editor extends HttpServlet {
         if (id <= 0) {
             request.setAttribute("title", "");
             request.setAttribute("body", "");
+            request.setAttribute("username", username);
             return HttpServletResponse.SC_OK;
         }
 
@@ -169,6 +171,7 @@ public class Editor extends HttpServlet {
         if (post != null) {
             request.setAttribute("title", post.getTitle()); 
             request.setAttribute("body", post.getBody());
+            request.setAttribute("username", username);
             return HttpServletResponse.SC_OK;
         }
         return HttpServletResponse.SC_NOT_FOUND; 
