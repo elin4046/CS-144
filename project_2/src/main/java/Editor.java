@@ -232,7 +232,8 @@ public class Editor extends HttpServlet {
             // Update existing post if one exists, otherwise do nothing 
             Post post = controller.getPost(username, id);
             if (post != null) {
-                controller.updatePost(post);
+                Post newPost = new Post(username, id, title, body);
+                controller.updatePost(newPost);
             }
         }
         request.setAttribute("username", username);
