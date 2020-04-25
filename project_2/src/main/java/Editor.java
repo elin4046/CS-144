@@ -140,16 +140,6 @@ public class Editor extends HttpServlet {
             return HttpServletResponse.SC_BAD_REQUEST; 
         }
 
-        // Title and body parameters are available in the parameter, so prepopulate the fields with them
-        String title = request.getParameter("title"); 
-        String body = request.getParameter("body"); 
-        if (title != null && body != null) {
-            request.setAttribute("title", title); 
-            request.setAttribute("body", body); 
-            request.setAttribute("username", username);
-            return HttpServletResponse.SC_OK;
-        }
-
         // Check if postId parameter is actually a number
         int id = 0;
         try {
@@ -159,8 +149,21 @@ public class Editor extends HttpServlet {
             return HttpServletResponse.SC_BAD_REQUEST;
         }
 
+        // Title and body parameters are available in the parameter, so prepopulate the fields with them
+        String title = request.getParameter("title"); 
+        String body = request.getParameter("body"); 
+        if (title != null && body != null) {
+            request.setAttribute("title", title); 
+            request.setAttribute("postid", postId); 
+            request.setAttribute("body", body); 
+            request.setAttribute("username", username);
+            return HttpServletResponse.SC_OK;
+        }
+
+
         // Invalid postid specified, so leave the fields title and body blank
         if (id <= 0) {
+            request.setAttribute("postid", postId); 
             request.setAttribute("title", "");
             request.setAttribute("body", "");
             request.setAttribute("username", username);
@@ -173,6 +176,7 @@ public class Editor extends HttpServlet {
 
         // Entry exists in the database, so populate the fields title and body with them 
         if (post != null) {
+            request.setAttribute("postid", postId); 
             request.setAttribute("title", post.getTitle()); 
             request.setAttribute("body", post.getBody());
             request.setAttribute("username", username);
