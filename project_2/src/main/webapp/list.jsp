@@ -43,8 +43,8 @@ prefix="c" %><!DOCTYPE html>
         <c:forEach items="${posts}" var="post">
           <div class="each-post">
             <div>${post.title}</div>
-            <div>${post.created}</div>
-            <div>${post.modified}</div>
+            <div>${post.prettyCreatedDate()}</div>
+            <div>${post.prettyModifiedDate()}</div>
             <div class="open-delete-buttons">
               <form action="post" method="POST">
                 <input

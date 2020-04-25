@@ -23,6 +23,14 @@ prefix="c" %><!DOCTYPE html>
         <form action="post" method="POST">
           <input name="username" value="${username}" style="display: none;" />
           <input name="postid" value="${postid}" style="display: none;" />
+          <input
+            name="title"
+            value='${param["title"]}'
+            style="display: none;"
+          />
+          <textarea name="body" value='${param["body"]}' style="display: none;">
+${param["body"]}</textarea
+          >
           <input name="action" value="open" style="display: none;" />
           <button type="submit" class="btn btn-info">
             Close Preview

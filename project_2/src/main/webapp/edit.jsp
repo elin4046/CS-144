@@ -44,12 +44,17 @@ prefix="c" %><!DOCTYPE html>
           <input name="action" value="preview" style="display: none;" />
           <input name="username" value="${username}" style="display: none;" />
           <input name="postid" value="${postid}" style="display: none;" />
-          <input name="title" value="${title}" style="display: none;" />
-          <input name="body" value="${body}" style="display: none;" />
+          <input name="title" id="preview-title" style="display: none;" />
+          <textarea
+            name="body"
+            id="preview-body"
+            style="display: none;"
+          ></textarea>
           <button
             type="submit"
             class="btn btn-info"
             style="margin-left: 8px; margin-right: 8px;"
+            onclick="handlePreview()"
           >
             Preview
           </button>
@@ -79,6 +84,7 @@ prefix="c" %><!DOCTYPE html>
             id="title"
             name="title"
             value="${title}"
+            onchange="myChangeFunction1(this)"
           />
         </div>
         <div class="body-wrapper">
@@ -88,12 +94,32 @@ prefix="c" %><!DOCTYPE html>
             id="body"
             name="body"
             style="height: 250px; width: 350px; margin-bottom: 10px;"
+            onchange="myChangeFunction2(this)"
           >
 ${body}</textarea
           >
         </div>
       </form>
     </div>
+    <script type="text/javascript">
+      function myChangeFunction1(input1) {
+        var input2 = document.getElementById("preview-title");
+        input2.value = input1.value;
+      }
+      function myChangeFunction2(input1) {
+        var input2 = document.getElementById("preview-body");
+        input2.value = input1.value;
+      }
+      function handlePreview() {
+        var inputTitle = document.getElementById("title");
+        var inputBody = document.getElementById("body");
+        var previewTitle = document.getElementById("preview-title");
+        var previewBody = document.getElementById("preview-body");
+
+        previewTitle.value = inputTitle.value;
+        previewBody.value = inputBody.value;
+      }
+    </script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
