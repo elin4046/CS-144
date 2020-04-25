@@ -56,7 +56,7 @@ public class PostController {
     }
 
     // Get a list of all posts made by a user
-    public List<Post> getPostsMadeByUser(String username) {
+    public List<Post> getPostsMadeByUsername(String username) {
         Connection connection = null;
         PreparedStatement preparedStatement = null; 
         ResultSet rs = null; 
@@ -67,7 +67,7 @@ public class PostController {
 
             // Generate prepared statement and substitute values 
             preparedStatement = connection.prepareStatement(
-                "SELECT * FROM Posts WHERE username = ?" 
+                "SELECT * FROM Posts WHERE username = ? ORDER BY postid" 
             ); 
             preparedStatement.setString(1, username); 
 

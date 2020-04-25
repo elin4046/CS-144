@@ -56,23 +56,28 @@ public class Editor extends HttpServlet {
         }
 
         int statusCode = 0;
+        String requestDispatcher = null;
         switch(action) {
             case "open": 
                 statusCode = openPost(request, response);
+                requestDispatcher = "/edit.jsp"; 
                 break; 
             case "preview":
             case "list": 
+                statusCode = listPosts(request, response); 
+                requestDispatcher = "/list.jsp"; 
+                break;
             default: 
                 statusCode = HttpServletResponse.SC_BAD_REQUEST;
         }
 
         if (statusCode == HttpServletResponse.SC_OK) {
             response.setStatus(HttpServletResponse.SC_OK);
-            request.getRequestDispatcher("/edit.jsp").forward(request, response);
+            request.getRequestDispatcher(requestDispatcher).forward(request, response);
         }
         else {
             response.sendError(statusCode);
-        }             
+        }            
     }
     
     /**
@@ -92,12 +97,17 @@ public class Editor extends HttpServlet {
         }
 
         int statusCode = 0;
+        String requestDispatcher = null;
         switch(action) {
             case "open": 
                 statusCode = openPost(request, response);
+                requestDispatcher = "/edit.jsp"; 
                 break; 
             case "preview":
             case "list": 
+                statusCode = listPosts(request, response); 
+                requestDispatcher = "/list.jsp";
+                break;
             case "save": 
             case "delete": 
             default: 
@@ -106,7 +116,7 @@ public class Editor extends HttpServlet {
 
         if (statusCode == HttpServletResponse.SC_OK) {
             response.setStatus(HttpServletResponse.SC_OK);
-            request.getRequestDispatcher("/edit.jsp").forward(request, response);
+            request.getRequestDispatcher(requestDispatcher).forward(request, response);
         }
         else {
             response.sendError(statusCode);
@@ -124,7 +134,7 @@ public class Editor extends HttpServlet {
     }
 
     // Handler for the 'open' action 
-    // Prepopulates the 'title' and 'body' fields of the edit form if a post exists in the database or if the information is in the request parameter
+    // Provides the 'title' and 'body' fields of the edit form if a post exists in the database or if the information is in the request parameter
     // If a postID is zero or negative, the fields are assumed to be blank 
     // Returns the HTTP status code to return 
     private int openPost(HttpServletRequest request, HttpServletResponse response)
@@ -165,6 +175,23 @@ public class Editor extends HttpServlet {
             return HttpServletResponse.SC_OK;
         }
         return HttpServletResponse.SC_NOT_FOUND; 
+    }
+
+    
+    // Handler for 'list' action
+    // 
+    private int listPosts(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        // Required parameters: username 
+        String username = request.getParameter("username");
+        if (username == null) {
+            return HttpServletResponse.SC_BAD_REQUEST; 
+        }
+
+        PostController controller = new PostController(); 
+        List<Post> posts = controller.getPostsMadeByUsername(username);
+        request.setAttribute("posts", posts);
+        return HttpServletResponse.SC_OK;
     }
 }
 

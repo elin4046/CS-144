@@ -1,4 +1,5 @@
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat; 
 
 public class Post {
 
@@ -59,6 +60,13 @@ public class Post {
         this.modified = t; 
     }
 
+    public String prettyModifiedDate() {
+        return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(modified);
+    }
+
+    public String prettyCreatedDate() {
+        return new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").format(created);
+    }
 
     @Override
     public String toString() {
