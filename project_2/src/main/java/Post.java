@@ -43,7 +43,6 @@ public class Post {
         return created; 
     }
 
-    
     public void setTitle(String title) {
         this.title = title; 
     }

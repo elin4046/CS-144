@@ -63,6 +63,9 @@ public class Editor extends HttpServlet {
                 requestDispatcher = "/edit.jsp"; 
                 break; 
             case "preview":
+                statusCode = previewPost(request, response);
+                requestDispatcher = "/preview.jsp"; 
+                break;
             case "list": 
                 statusCode = listPosts(request, response); 
                 requestDispatcher = "/list.jsp"; 
@@ -104,6 +107,9 @@ public class Editor extends HttpServlet {
                 requestDispatcher = "/edit.jsp"; 
                 break; 
             case "preview":
+                statusCode = previewPost(request, response);
+                requestDispatcher = "/preview.jsp"; 
+                break;
             case "list": 
                 statusCode = listPosts(request, response); 
                 requestDispatcher = "/list.jsp";
@@ -190,8 +196,8 @@ public class Editor extends HttpServlet {
 
         PostController controller = new PostController(); 
         List<Post> posts = controller.getPostsMadeByUsername(username);
-        System.out.println(posts);
         request.setAttribute("posts", posts);
+        request.setAttribute("username", username);
         return HttpServletResponse.SC_OK;
     }
 
@@ -222,6 +228,7 @@ public class Editor extends HttpServlet {
                 controller.updatePost(post);
             }
         }
+        request.setAttribute("username", username);
         return HttpServletResponse.SC_OK;
     }
 
@@ -238,6 +245,32 @@ public class Editor extends HttpServlet {
         PostController controller = new PostController();
         int id = Integer.parseInt(postId);
         controller.deletePost(username, id);
+        request.setAttribute("username", username);
+        return HttpServletResponse.SC_OK;
+    }
+
+    // Handler for 'preview' action
+    private int previewPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        // Required parameters: postid, title, and body
+        String username = request.getParameter("username");
+        String postId = request.getParameter("postid");
+        String title = request.getParameter("title");
+        String body = request.getParameter("body");
+        if (username == null || postId == null || title == null || body == null) {
+            return HttpServletResponse.SC_BAD_REQUEST; 
+        }
+        Parser parser = Parser.builder().build(); 
+        HtmlRenderer renderer = HtmlRenderer.builder().build(); 
+        String markdownTitle = renderer.render(parser.parse(title));
+        String markdownBody = renderer.render(parser.parse(body));
+
+        request.setAttribute("username", username);
+        request.setAttribute("postid", postId);
+        request.setAttribute("body", body);
+        request.setAttribute("title", title);
+        request.setAttribute("markdownBody", markdownBody);
+        request.setAttribute("markdownTitle", markdownTitle);
         return HttpServletResponse.SC_OK;
     }
 }
