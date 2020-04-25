@@ -109,6 +109,9 @@ public class Editor extends HttpServlet {
                 requestDispatcher = "/list.jsp";
                 break;
             case "save": 
+                statusCode = savePost(request, response);
+                requestDispatcher = "/list.jsp";
+                break;
             case "delete": 
             default: 
                 statusCode = HttpServletResponse.SC_BAD_REQUEST;
@@ -179,7 +182,7 @@ public class Editor extends HttpServlet {
 
     
     // Handler for 'list' action
-    // 
+    // Provides a list of posts made by the inputted username to the request dispatcher 
     private int listPosts(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
         // Required parameters: username 
@@ -190,7 +193,38 @@ public class Editor extends HttpServlet {
 
         PostController controller = new PostController(); 
         List<Post> posts = controller.getPostsMadeByUsername(username);
+        System.out.println(posts);
         request.setAttribute("posts", posts);
+        return HttpServletResponse.SC_OK;
+    }
+
+    // Handler for 'save' action
+    private int savePost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+        // Required parameters: username, postid, title, and body
+        String username = request.getParameter("username");
+        String postId = request.getParameter("postid");
+        String title = request.getParameter("title");
+        String body = request.getParameter("body");
+        if (username == null || postId == null || title == null || body == null) {
+            return HttpServletResponse.SC_BAD_REQUEST; 
+        }
+
+        PostController controller = new PostController();
+        int id = Integer.parseInt(postId);
+        if (id <= 0) {
+            // Get the next id to use 
+            int nextAvailablePostId = controller.getMaxPostIdFromUser(username) + 1;
+            Post newPost = new Post(username, nextAvailablePostId, title, body);
+            controller.insertPost(newPost);
+        }
+        else {
+            // Update existing post if one exists, otherwise do nothing 
+            Post post = controller.getPost(username, id);
+            if (post != null) {
+                controller.updatePost(post);
+            }
+        }
         return HttpServletResponse.SC_OK;
     }
 }

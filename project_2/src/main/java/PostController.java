@@ -96,6 +96,38 @@ public class PostController {
         }
     }
 
+    // Get the maximum postId used by a user
+    public int getMaxPostIdFromUser(String username) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null; 
+        ResultSet rs = null; 
+        int maxPostId = 0; 
+        try {
+            // Create a new database connection 
+            connection = createConnection(); 
+
+            // Generate prepared statement and substitute values 
+            preparedStatement = connection.prepareStatement(
+                "SELECT MAX(postid) AS max FROM Posts WHERE username = ?" 
+            ); 
+            preparedStatement.setString(1, username); 
+
+            // Execute the query  
+            rs = preparedStatement.executeQuery(); 
+            if (rs.next()) {
+                maxPostId = rs.getInt("max");
+            }
+        }
+        catch(SQLException ex) {
+            handleSQLException(ex);
+        }
+        finally {
+            closeConnections(connection, preparedStatement, rs);
+            return maxPostId;
+        }
+    }
+
+
     // Add a new post into the database and return the newly added post with updated timestamps
     public Post insertPost(Post newPost) {
         Connection connection = null;
