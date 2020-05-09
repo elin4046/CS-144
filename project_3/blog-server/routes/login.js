@@ -14,7 +14,6 @@ router.post("", async (req, res) => {
         await Users.login(username, password);
     }
     catch (e) {
-        console.log(e);
         // Could not login due to an error 
         return res.status(e.statusCode).render("login", { username, password, redirect: req.body.redirect });
     }

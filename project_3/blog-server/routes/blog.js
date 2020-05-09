@@ -3,7 +3,7 @@ const router = express.Router();
 const Error = require("../error");
 
 /* GET a blog post with postid and username */
-router.get("/:username/:postid", async (req, res) => {
+router.get("/:username/:postid", async (req, res, next) => {
   if (isNaN(req.params.postid)) {
     return res.status(404).render("error", { error: new Error(400, "Postid is not a number!") });
   }
@@ -17,16 +17,15 @@ router.get("/:username/:postid", async (req, res) => {
 
     // Query for the post using username and postid
     const Posts = req.app.get("db").Posts;
-    const post = await Posts.getPost(username, postid);
+    const post = await Posts.getPost(username, postid, isPretty=true);
     res.render("post", { post, username });
   }
   catch (error) {
-    console.log(error);
-    return res.status(error.statusCode).render("error", { error });
+    next(error);
   }
 });
 
-router.get("/:username", async (req, res) => {
+router.get("/:username", async (req, res, next) => {
   const username = req.params.username;
   const startFrom = req.query.start ? parseInt(req.query.start) : 1;
 
@@ -37,7 +36,7 @@ router.get("/:username", async (req, res) => {
 
     // Query for user's posts for postid >= startFrom
     const Posts = req.app.get("db").Posts;
-    let posts = await Posts.getUserPostsStartingFrom(username, startFrom);
+    let posts = await Posts.getUserPostsStartingFrom(username, startFrom, isPretty=true);
     
     let nextPageUrl;
     if (posts.length > 5) {
@@ -50,8 +49,7 @@ router.get("/:username", async (req, res) => {
     res.render("blog", { username, posts, nextPageUrl });
   }
   catch(error) {
-    console.log(error);
-    return res.status(error.statusCode).render("error", { error });
+    next(error);
   }
 });
 
