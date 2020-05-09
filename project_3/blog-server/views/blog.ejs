@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= username %>'s Blog</title>
+</head>
+
+<body>
+  <h1><%= username %>'s blog</h1>
+  <ul>
+    <% posts.forEach((post) => { %>
+    <li><%- post.title %></li>
+    <ul>
+      <li><%- post.body %></li>
+      <li><%= post.created %></li>
+      <li><%= post.modified %></li>
+    </ul>
+    <% }); %>
+  </ul>
+  <% if (nextPageUrl) { %>
+  <a id="next" href=<%= nextPageUrl %>>Next</a>
+  <%}; %>
+</body>
+
+
+</html>

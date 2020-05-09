@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= username %>'s Blog</title>
+</head>
+
+<body>
+  <h1><%= username %>'s blog post</h1>
+  <ul>
+    <li><%- post.title %></li>
+    <ul>
+      <li><%- post.body %></li>
+      <li><%= post.created %></li>
+      <li><%= post.modified %></li>
+    </ul>
+  </ul>
+</body>
+
+</html>
