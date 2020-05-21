@@ -8,7 +8,7 @@ var apiRouter = require("./routes/api");
 var loginRouter = require("./routes/login");
 
 var mongo = require("./db/mongodb");
-var handleError = require("./middleware/errorHandler"); 
+var handleError = require("./middleware/errorHandler");
 
 
 
@@ -37,6 +37,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/blog", blogRouter);
 app.use("/api", apiRouter);
 app.use("/login", loginRouter);
-app.use(handleError); 
+app.use(handleError);
 
 module.exports = app;
