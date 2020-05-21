@@ -19,15 +19,15 @@ router.post("", async (req, res) => {
     }
 
     // Set authentication session token to expire in 2 hours  
-    let expirationTime = (Date.now()/1000) + 7200; 
-    const token = jwt.sign({usr: username, exp: expirationTime}, req.app.get("JWT_SECRET_KEY"));
+    let expirationTime = (Date.now() / 1000) + 7200;
+    const token = jwt.sign({ usr: username, exp: expirationTime }, req.app.get("JWT_SECRET_KEY"));
     res.cookie("jwt", token);
 
     // Redirect if necessary 
     if (req.body.redirect) {
-        return res.redirect(req.body.redirect); 
+        return res.redirect(req.body.redirect);
     }
-    return res.status(200).send("Success"); 
+    return res.status(200).send("Success");
 })
 
 module.exports = router;
