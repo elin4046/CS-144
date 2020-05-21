@@ -1,0 +1,40 @@
+<div *ngIf="draft" class="edit-wrapper">
+  <app-list></app-list>
+  <div class="edit-form">
+    <label for="title">Title:</label>
+    <input
+      id="title"
+      style="height: 40px; width: 300px;"
+      value="{{ draft.title }}"
+      class="form-control"
+      (input)="onTitleChange($event)"
+    />
+    <label for="body" style="margin-top: 10px;">Body:</label>
+    <textarea
+      id="body"
+      style="height: 160px; width: 300px;"
+      value="{{ draft.body }}"
+      class="form-control"
+      (input)="onBodyChange($event)"
+    ></textarea>
+    <div class="last-modified">
+      Last Modified: {{ formatDate(draft.modified) }}
+    </div>
+    <div class="edit-button-row">
+      <button type="button" class="btn btn-danger" (click)="deletePost()">
+        Delete
+      </button>
+      <button
+        type="button"
+        class="btn btn-success"
+        [disabled]="disabled"
+        (click)="updatePost()"
+      >
+        Save
+      </button>
+      <button type="button" class="btn btn-info" (click)="previewPost()">
+        Preview
+      </button>
+    </div>
+  </div>
+</div>

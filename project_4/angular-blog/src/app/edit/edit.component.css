@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+.edit-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 650px;
+  font-family: "Montserrat";
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.last-modified {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.edit-button-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 300px;
+  margin-top: 10px;
+}

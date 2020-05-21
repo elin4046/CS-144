@@ -1,0 +1,17 @@
+<div *ngIf="posts" class="list-wrapper">
+  <button type="button" class="btn btn-primary" (click)="newPost()">
+    New Post
+  </button>
+  <div class="list-component">
+    <div
+      *ngFor="let post of posts"
+      (click)="setCurrentDraft(post)"
+      class="list-element"
+    >
+      <div class="blog-card">
+        <div>{{ formatDate(post.created) }}</div>
+        <div>{{ post.title }}</div>
+      </div>
+    </div>
+  </div>
+</div>

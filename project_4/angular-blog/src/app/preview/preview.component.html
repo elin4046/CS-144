@@ -1,0 +1,17 @@
+<div *ngIf="draft" class="preview-wrapper">
+  <app-list></app-list>
+  <div class="preview-form">
+    <button
+      type="button"
+      class="btn btn-warning"
+      (click)="switchToEdit()"
+      style="width: 100px;"
+    >
+      Edit
+    </button>
+    <div class="preview-content">
+      <div [innerHTML]="renderMarkup(draft.title)"></div>
+      <div [innerHTML]="renderMarkup(draft.body)"></div>
+    </div>
+  </div>
+</div>

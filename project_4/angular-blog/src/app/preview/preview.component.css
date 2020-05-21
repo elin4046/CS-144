@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+.preview-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 650px;
+  font-family: "Montserrat";
+}
+
+.preview-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  margin-left: 100px;
+}
+
+.preview-content {
+  margin-top: 20px;
+}
