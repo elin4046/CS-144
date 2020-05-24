@@ -9,8 +9,7 @@ var loginRouter = require("./routes/login");
 
 var mongo = require("./db/mongodb");
 var handleError = require("./middleware/errorHandler");
-
-
+var jwtAuthRedirect = require("./middleware/jwtAuthRedirect");
 
 var app = express();
 // Start up the mongodb database
@@ -33,10 +32,14 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+
+
 app.use("/blog", blogRouter);
 app.use("/api", apiRouter);
 app.use("/login", loginRouter);
+app.use(jwtAuthRedirect);
+app.use(express.static(path.join(__dirname, "public")));
 app.use(handleError);
+
 
 module.exports = app;
