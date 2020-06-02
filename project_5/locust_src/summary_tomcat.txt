@@ -1,0 +1,20 @@
+[2020-06-02 06:53:49,124] c531c5b0c295/INFO/locust.main: Run time limit set to 20 seconds
+[2020-06-02 06:53:49,124] c531c5b0c295/INFO/locust.main: Starting Locust 0.9.0
+[2020-06-02 06:53:49,124] c531c5b0c295/INFO/locust.runners: Hatching and swarming 1900 clients at the rate 100 clients/s...
+[2020-06-02 06:54:09,220] c531c5b0c295/INFO/locust.main: Time limit reached. Stopping Locust.
+[2020-06-02 06:54:09,327] c531c5b0c295/INFO/locust.main: Shutting down (exit code 0), bye.
+[2020-06-02 06:54:09,327] c531c5b0c295/INFO/locust.main: Cleaning up runner...
+[2020-06-02 06:54:10,348] c531c5b0c295/INFO/locust.main: Running teardowns...
+ Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s
+--------------------------------------------------------------------------------------------------------------------------------------------
+ GET /editor/post?action=open                                    7018     0(0.00%)     256       2     931  |     290  379.40
+ POST /editor/post?action=save                                    754     0(0.00%)     378      14    1217  |     420   40.40
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Total                                                           7772     0(0.00%)                                     419.80
+Percentage of the requests completed within given times
+ Name                                                           # reqs    50%    66%    75%    80%    90%    95%    98%    99%   100%
+--------------------------------------------------------------------------------------------------------------------------------------------
+ GET /editor/post?action=open                                     7018    290    410    450    470    520    560    610    640    930
+ POST /editor/post?action=save                                     754    420    520    600    640    800    900    990   1100   1200
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Total                                                            7772    300    420    460    480    540    600    690    810   1200

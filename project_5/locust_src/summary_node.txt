@@ -1,0 +1,27 @@
+[2020-06-02 06:27:18,586] c531c5b0c295/INFO/locust.main: Run time limit set to 10 seconds
+[2020-06-02 06:27:18,586] c531c5b0c295/INFO/locust.main: Starting Locust 0.9.0
+[2020-06-02 06:27:18,586] c531c5b0c295/INFO/locust.runners: Hatching and swarming 18 clients at the rate 100 clients/s...
+[2020-06-02 06:27:18,778] c531c5b0c295/INFO/locust.runners: All locusts hatched: MyLocust: 18
+[2020-06-02 06:27:18,778] c531c5b0c295/INFO/locust.runners: Resetting stats
+
+[2020-06-02 06:27:28,590] c531c5b0c295/INFO/locust.main: Time limit reached. Stopping Locust.
+[2020-06-02 06:27:28,594] c531c5b0c295/INFO/locust.main: Shutting down (exit code 0), bye.
+[2020-06-02 06:27:28,594] c531c5b0c295/INFO/locust.main: Cleaning up runner...
+[2020-06-02 06:27:28,599] c531c5b0c295/INFO/locust.main: Running teardowns...
+ Name                                                          # reqs      # fails     Avg     Min     Max  |  Median   req/s
+--------------------------------------------------------------------------------------------------------------------------------------------
+ PUT /api/cs144                                                     9     0(0.00%)     117       7     979  |       9    0.75
+ GET /blog/cs144                                                  103     0(0.00%)      93       4     978  |       9    9.25
+ POST /login                                                       17     0(0.00%)     862     452    1306  |     880    2.12
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Total                                                            129     0(0.00%)                                      12.12
+
+Percentage of the requests completed within given times
+ Name                                                           # reqs    50%    66%    75%    80%    90%    95%    98%    99%   100%
+--------------------------------------------------------------------------------------------------------------------------------------------
+ PUT /api/cs144                                                      9      9      9     10     10    980    980    980    980    980
+ GET /blog/cs144                                                   103      9     10     11     12    500    740    980    980    980
+ POST /login                                                        17    880   1200   1200   1300   1300   1300   1300   1300   1300
+--------------------------------------------------------------------------------------------------------------------------------------------
+ Total                                                             129      9     11     99    490    900    980   1300   1300   1300
+
