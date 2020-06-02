@@ -3,3 +3,4 @@ project_2/build
 project_3/blog-server/node_modules
 project_4/angular-blog/node_modules
 project_4/angular-blog/.vscode
+project_5/locust_src/*.pyc
